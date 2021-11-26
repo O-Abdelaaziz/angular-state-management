@@ -1,1 +1,38 @@
-<p>products works!</p>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar navbar-nav">
+    <li>
+      <button (click)="onGetProducts()" class="btn btn-sm btn-outline-info ml-2">All</button>
+    </li>
+    <li>
+      <button class="btn btn-sm btn-outline-info ml-2">Selected</button>
+    </li>
+    <li>
+      <button class="btn btn-sm btn-outline-info ml-2">Available</button>
+    </li>
+  </ul>
+</nav>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available<th>Action</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{product.id}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.selected}}</td>
+      <td>{{product.available}}</td>
+      <td>
+        <button class="btn btn-success">
+          <span class="fa fa-edit"></span>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger">
+          <span class="fa fa-trash-o"></span>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
