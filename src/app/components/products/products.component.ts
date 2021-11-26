@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../models/product.model";
 import {ProductService} from "../../services/product.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
+import {catchError, map, startWith} from "rxjs/operators";
+import {AppDataState, DataStateEnum} from "../../states/product.state";
 
 @Component({
   selector: 'app-products',
@@ -10,7 +12,8 @@ import {Observable} from "rxjs";
 })
 export class ProductsComponent implements OnInit {
   // public products: Product[] | null = null;
-  public products$: Observable<Product[]> | null = null;
+  public products$: Observable<AppDataState<Product[]>> | null = null;
+  readonly DataStateEnum = DataStateEnum;
 
   constructor(private _productService: ProductService) {
   }
@@ -18,8 +21,13 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.onGetProducts();
   }
+
   onGetProducts() {
-    this.products$ = this._productService.getAllProducts();
+    this.products$ = this._productService.getAllProducts().pipe(
+      map(response => ({dataState: DataStateEnum.LOADED, data: response})),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError(error => of({dataState: DataStateEnum.ERROR, errorMessage: error.message}))
+    );
   }
 
   //region Methode one
