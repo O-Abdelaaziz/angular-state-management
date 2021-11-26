@@ -21,6 +21,9 @@ export class ProductsComponent implements OnInit {
     this._productService.getAllProducts().subscribe(
       (response) => {
         this.products = response;
+      },
+      (error)=>{
+        console.log("Something went wrong: ", error);
       }
     )
   }
