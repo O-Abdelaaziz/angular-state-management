@@ -10,6 +10,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { ProductsNavbarComponent } from './components/products/products-navbar/products-navbar.component';
+import { ProductsListComponent } from './components/products/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
     HomeComponent,
     ProductAddComponent,
     ProductUpdateComponent,
+    ProductsNavbarComponent,
+    ProductsListComponent,
   ],
   imports: [
     BrowserModule,
