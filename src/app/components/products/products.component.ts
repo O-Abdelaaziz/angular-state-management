@@ -86,6 +86,7 @@ export class ProductsComponent implements OnInit {
   //   )
   // }
   //endregion
+
   onProductAdd() {
     this._router.navigateByUrl('/product-add')
   }
@@ -114,6 +115,18 @@ export class ProductsComponent implements OnInit {
       }
       case ProductActionsTypes.SEARCH_PRODUCTS: {
         this.onSearch($event.payload);
+        break;
+      }
+      case ProductActionsTypes.SELECT_PRODUCT: {
+        this.onSelect($event.payload);
+        break;
+      }
+      case ProductActionsTypes.DELETE_PRODUCT: {
+        this.onDelete($event.payload);
+        break;
+      }
+      case ProductActionsTypes.EDIT_PRODUCT: {
+        this.onUpdate($event.payload);
         break;
       }
       default: {

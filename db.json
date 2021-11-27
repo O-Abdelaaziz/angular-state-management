@@ -5,7 +5,7 @@
       "name": "Assorted Desserts",
       "price": "$8.98",
       "quantity": 54,
-      "selected": false,
+      "selected": true,
       "available": false
     },
     {

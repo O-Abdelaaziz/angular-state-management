@@ -1,1 +1,55 @@
-<p>products-list works!</p>
+<div class="container">
+  <ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">Loading ...</ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+      <p class="alert alert-danger text-center mt-2">
+        {{result.errorMessage}}
+      </p>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+      <div class="container mt-1">
+        <table class="table  table-striped table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Selected</th>
+            <th>Available
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of result.data">
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.selected}}</td>
+            <td>{{product.available}}</td>
+            <td>
+              <button (click)="onSelect(product)" [ngClass]="product.selected? 'btn-danger':'btn-success'"
+                      class="btn btn-sm">
+                <span *ngIf="product.selected">Unselect</span>
+                <span *ngIf="!product.selected">Select</span>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-success mr-1" (click)="onUpdate(product.id)">
+                <span class="fa fa-edit"></span>
+              </button>
+              <button class="btn btn-danger" (click)="onDelete(product)">
+                <span class="fa fa-trash-o"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-danger" role="alert" *ngIf="result.data?.length==0">
+          There is no product available with this name.
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
