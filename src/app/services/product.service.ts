@@ -37,4 +37,8 @@ export class ProductService {
   deleteProduct(product: Product): Observable<void> {
     return this._httpClient.delete<void>(`${this.host}/products/${product.id}`);
   }
+
+  saveProduct(product?: Product): Observable<Product> {
+    return this._httpClient.post<Product>(`${this.host}/products/`, product);
+  }
 }

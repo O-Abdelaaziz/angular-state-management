@@ -1,0 +1,59 @@
+<div class="container">
+  <form [formGroup]="productFormGroup" *ngIf="productFormGroup">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" class="form-control" formControlName="name"
+             [ngClass]="{'is-invalid': isSubmitted && productFromControls?.name?.errors}">
+      <small
+        *ngIf="!productFromControls?.name?.valid && (productFromControls?.name?.dirty ||productFromControls?.name?.touched)"
+        class="text-danger">
+        <div [hidden]="!productFromControls?.name?.errors?.required">
+          name is required
+        </div>
+        <div [hidden]="!productFromControls?.name?.errors?.minlength">
+          name must be at least 2 characters
+        </div>
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input id="price" type="text" class="form-control" formControlName="price"
+             [ngClass]="{'is-invalid': isSubmitted && productFromControls?.price?.errors}">
+      <small
+        *ngIf="!productFromControls?.price?.valid && (productFromControls?.price?.dirty ||productFromControls?.price?.touched)"
+        class="text-danger">
+        <div [hidden]="!productFromControls?.price?.errors?.required">
+          price is required
+        </div>
+        <div [hidden]="!productFromControls?.price?.errors?.minlength">
+          price must be at least 2 characters
+        </div>
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input id="quantity" type="text" class="form-control" formControlName="quantity"
+             [ngClass]="{'is-invalid': isSubmitted && productFromControls?.quantity?.errors}">
+      <small
+        *ngIf="!productFromControls?.quantity?.valid && (productFromControls?.quantity?.dirty ||productFromControls?.quantity?.touched)"
+        class="text-danger">
+        <div [hidden]="!productFromControls?.quantity?.errors?.required">
+          quantity is required
+        </div>
+        <div [hidden]="!productFromControls?.quantity?.errors?.minlength">
+          quantity must be at least 2 characters
+        </div>
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="selected">Selected</label>
+      <input id="selected" type="checkbox" formControlName="selected" class="form-check">
+    </div>
+    <div class="form-group">
+      <label for="available">Available</label>
+      <input id="available" type="checkbox" formControlName="available" class="form-check">
+    </div>
+    <button class="btn btn-success" (click)="onSaveProduct()">Save <i *ngIf="isLoading"
+                                                                      class="fa fa-spinner fa-spin"></i></button>
+  </form>
+</div>

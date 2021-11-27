@@ -23,6 +23,30 @@
       "quantity": 0,
       "selected": false,
       "available": false
+    },
+    {
+      "id": 44,
+      "name": "printer",
+      "price": "8500",
+      "quantity": "60",
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 47,
+      "name": "phone",
+      "price": "50000",
+      "quantity": "20",
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 56,
+      "name": "mouse",
+      "price": "1000",
+      "quantity": "55",
+      "selected": true,
+      "available": true
     }
   ]
 }
