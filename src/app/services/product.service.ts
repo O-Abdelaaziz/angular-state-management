@@ -25,8 +25,16 @@ export class ProductService {
     return this._httpClient.get<Product[]>(`${this.host}/products?available=true`)
   }
 
-  searchProducts(keyword:string): Observable<Product[]> {
+  searchProducts(keyword: string): Observable<Product[]> {
     return this._httpClient.get<Product[]>(`${this.host}/products?name_like=${keyword}`)
   }
 
+  selectProduct(product: Product): Observable<Product> {
+    product.selected = !product.selected;
+    return this._httpClient.put<Product>(`${this.host}/products/${product.id}`, product);
+  }
+
+  deleteProduct(product: Product): Observable<void> {
+    return this._httpClient.delete<void>(`${this.host}/products/${product.id}`);
+  }
 }

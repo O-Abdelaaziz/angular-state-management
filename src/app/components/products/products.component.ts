@@ -54,6 +54,23 @@ export class ProductsComponent implements OnInit {
     );
   }
 
+  onSelect(product: Product) {
+    this._productService.selectProduct(product).subscribe(
+      (response) => {
+        // this.onGetProducts();
+        product.selected = response.selected;
+      }
+    )
+  }
+
+  onDelete(product: Product) {
+    this._productService.deleteProduct(product).subscribe(
+      (response) => {
+        this.onGetProducts();
+      }
+    )
+  }
+
   //region Methode one
   // onGetProducts() {
   //   this._productService.getAllProducts().subscribe(
@@ -66,5 +83,4 @@ export class ProductsComponent implements OnInit {
   //   )
   // }
   //endregion
-
 }
