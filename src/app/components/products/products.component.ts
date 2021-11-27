@@ -3,7 +3,7 @@ import {Product} from "../../models/product.model";
 import {ProductService} from "../../services/product.service";
 import {Observable, of} from "rxjs";
 import {catchError, map, startWith} from "rxjs/operators";
-import {AppDataState, DataStateEnum} from "../../states/product.state";
+import {ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes} from "../../states/product.state";
 import {Router} from "@angular/router";
 
 @Component({
@@ -91,6 +91,36 @@ export class ProductsComponent implements OnInit {
   }
 
   onUpdate(id: number) {
-    this._router.navigateByUrl('/product-update/'+id);
+    this._router.navigateByUrl('/product-update/' + id);
+  }
+
+  onActionEvent($event: ActionEvent) {
+    switch ($event.type) {
+      case ProductActionsTypes.GET_ALL_PRODUCTS: {
+        this.onGetProducts();
+        break;
+      }
+      case ProductActionsTypes.GET_SELECTED_PRODUCTS: {
+        this.onGetSelectedProducts();
+        break;
+      }
+      case ProductActionsTypes.GET_AVAILABLE_PRODUCTS: {
+        this.onGetAvailableProducts();
+        break;
+      }
+      case ProductActionsTypes.NEW_PRODUCT: {
+        this.onProductAdd();
+        break;
+      }
+      case ProductActionsTypes.SEARCH_PRODUCTS: {
+        this.onSearch($event.payload);
+        break;
+      }
+      default: {
+        this.onGetProducts()
+        break;
+      }
+
+    }
   }
 }
