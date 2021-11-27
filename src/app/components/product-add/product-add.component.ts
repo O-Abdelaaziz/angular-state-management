@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Product} from "../../models/product.model";
 import {ProductService} from "../../services/product.service";
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-product-add',
@@ -25,7 +26,8 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private _productService: ProductService,
     private _formBuilder: FormBuilder,
-    private _router: Router) {
+    private _router: Router,
+    private _location: Location) {
   }
 
   ngOnInit(): void {
@@ -71,5 +73,9 @@ export class ProductAddComponent implements OnInit {
         this.isSubmitted = false;
       }
     )
+  }
+
+  back(): void {
+    this._location.back()
   }
 }

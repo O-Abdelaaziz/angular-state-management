@@ -41,4 +41,12 @@ export class ProductService {
   saveProduct(product?: Product): Observable<Product> {
     return this._httpClient.post<Product>(`${this.host}/products/`, product);
   }
+
+  updateProduct(product?: Product): Observable<Product> {
+    return this._httpClient.put<Product>(`${this.host}/products/${product?.id}`, product);
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this._httpClient.get<Product>(`${this.host}/products/${id}`)
+  }
 }

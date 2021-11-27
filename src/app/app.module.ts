@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
     ProductsComponent,
     HomeComponent,
     ProductAddComponent,
+    ProductUpdateComponent,
   ],
   imports: [
     BrowserModule,

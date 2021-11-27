@@ -53,8 +53,8 @@
       <label for="available">Available</label>
       <input id="available" type="checkbox" formControlName="available" class="form-check">
     </div>
-    <button class="btn btn-success" (click)="onSaveProduct()">Save <i *ngIf="isLoading"
-                                                                      class="fa fa-spinner fa-spin"></i></button>
-    <button class="btn btn-danger ml-2" (click)="back()">Cancel</button>
+    <button class="btn btn-success" (click)="onUpdateProduct()">Update <i *ngIf="isLoading"
+                                                                      class="fa fa-spinner fa-spin"></i>
+    </button><button class="btn btn-danger ml-2" (click)="back()">Cancel</button>
   </form>
 </div>
