@@ -29,19 +29,28 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  onGetSelectedProducts(){
-    this.products$=this._productService.getSelectedProducts().pipe(
-      map((response)=>({dataState:DataStateEnum.LOADED,data:response})),
-      startWith({dataState:DataStateEnum.LOADED}),
-      catchError((error)=>of({dataState:DataStateEnum.LOADED,errorMessage:error.message}))
+  onGetSelectedProducts() {
+    this.products$ = this._productService.getSelectedProducts().pipe(
+      map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
+      startWith({dataState: DataStateEnum.LOADED}),
+      catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
     );
   }
 
-  onGetAvailableProducts(){
-    this.products$=this._productService.getAvailableProducts().pipe(
-      map((response)=>({dataState:DataStateEnum.LOADED,data:response})),
-      startWith({dataState:DataStateEnum.LOADED}),
-      catchError((error)=>of({dataState:DataStateEnum.LOADED,errorMessage:error.message}))
+  onGetAvailableProducts() {
+    this.products$ = this._productService.getAvailableProducts().pipe(
+      map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
+      startWith({dataState: DataStateEnum.LOADED}),
+      catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
+    );
+  }
+
+  onSearch(formData: any) {
+    console.log(formData)
+    this.products$ = this._productService.searchProducts(formData.keyword).pipe(
+      map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
+      startWith({dataState: DataStateEnum.LOADED}),
+      catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
     );
   }
 
@@ -57,4 +66,5 @@ export class ProductsComponent implements OnInit {
   //   )
   // }
   //endregion
+
 }

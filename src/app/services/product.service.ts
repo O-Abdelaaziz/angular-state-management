@@ -24,4 +24,9 @@ export class ProductService {
   getAvailableProducts(): Observable<Product[]> {
     return this._httpClient.get<Product[]>(`${this.host}/products?available=true`)
   }
+
+  searchProducts(keyword:string): Observable<Product[]> {
+    return this._httpClient.get<Product[]>(`${this.host}/products?name_like=${keyword}`)
+  }
+
 }

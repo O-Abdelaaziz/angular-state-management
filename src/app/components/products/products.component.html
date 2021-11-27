@@ -10,6 +10,16 @@
       <button (click)="onGetAvailableProducts()" class="btn btn-sm btn-outline-info ml-2">Available</button>
     </li>
   </ul>
+  <ul class="navbar navbar-nav ml-auto">
+    <li>
+      <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
+        <input type="text" id="keyword" ngModel name="keyword" class="form-control" placeholder="search" >
+        <button type="submit" class="btn btn-sm btn-outline-info ml-2">
+          <span class="fa fa-search"></span>
+        </button>
+      </form>
+    </li>
+  </ul>
 </nav>
 <div class="container">
   <ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
@@ -52,6 +62,9 @@
           </tr>
           </tbody>
         </table>
+        <div class="alert alert-danger" role="alert" *ngIf="result.data?.length==0">
+          There is no product available with this name.
+        </div>
       </div>
     </ng-container>
   </ng-container>
