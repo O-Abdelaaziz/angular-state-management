@@ -19,7 +19,6 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onGetProducts();
   }
 
   onGetProducts() {
@@ -27,6 +26,22 @@ export class ProductsComponent implements OnInit {
       map(response => ({dataState: DataStateEnum.LOADED, data: response})),
       startWith({dataState: DataStateEnum.LOADING}),
       catchError(error => of({dataState: DataStateEnum.ERROR, errorMessage: error.message}))
+    );
+  }
+
+  onGetSelectedProducts(){
+    this.products$=this._productService.getSelectedProducts().pipe(
+      map((response)=>({dataState:DataStateEnum.LOADED,data:response})),
+      startWith({dataState:DataStateEnum.LOADED}),
+      catchError((error)=>of({dataState:DataStateEnum.LOADED,errorMessage:error.message}))
+    );
+  }
+
+  onGetAvailableProducts(){
+    this.products$=this._productService.getAvailableProducts().pipe(
+      map((response)=>({dataState:DataStateEnum.LOADED,data:response})),
+      startWith({dataState:DataStateEnum.LOADED}),
+      catchError((error)=>of({dataState:DataStateEnum.LOADED,errorMessage:error.message}))
     );
   }
 
