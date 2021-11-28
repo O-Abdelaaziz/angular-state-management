@@ -28,11 +28,31 @@ export class ProductsListComponent implements OnInit {
     this.productsEventEmitter.emit({type: ProductActionsTypes.EDIT_PRODUCT, payload: id});
   }
 
-  onDelete(product: Product) {
+  onDelete(product?: Product) {
     this.productsEventEmitter.emit({type: ProductActionsTypes.DELETE_PRODUCT, payload: product})
   }
 
   onSelect(product: Product) {
     this.productsEventEmitter.emit({type: ProductActionsTypes.SELECT_PRODUCT, payload: product})
+  }
+
+  onActionEvent($event: ActionEvent) {
+    switch ($event.type) {
+      case ProductActionsTypes.SELECT_PRODUCT: {
+        this.onSelect($event.payload);
+        break;
+      }
+      case ProductActionsTypes.EDIT_PRODUCT: {
+        this.onUpdate($event.payload);
+        break;
+      }
+      case ProductActionsTypes.DELETE_PRODUCT: {
+        this.onDelete($event.payload);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 }
