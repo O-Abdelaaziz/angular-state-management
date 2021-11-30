@@ -4,10 +4,10 @@
       <button (click)="onGetProducts()" class="btn btn-sm btn-outline-info ml-2">All</button>
     </li>
     <li>
-      <button (click)="onGetSelectedProducts()" class="btn btn-sm btn-outline-info ml-2">Selected</button>
+      <button (click)="onGetSelectedProducts()" class="btn btn-sm btn-outline-info ml-2">Selected <span class="badge badge-primary">{{productSelectedCount}}</span></button>
     </li>
     <li>
-      <button (click)="onGetAvailableProducts()" class="btn btn-sm btn-outline-info ml-2">Available</button>
+      <button (click)="onGetAvailableProducts()" class="btn btn-sm btn-outline-info ml-2">Available <span class="badge badge-success">{{productAvailableCount}}</span></button>
     </li>
     <li>
       <button (click)="onProductAdd()" class="btn btn-sm btn-outline-info ml-2">New Product</button>

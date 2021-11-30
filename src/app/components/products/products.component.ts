@@ -5,6 +5,7 @@ import {Observable, of} from "rxjs";
 import {catchError, map, startWith} from "rxjs/operators";
 import {ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes} from "../../states/product.state";
 import {Router} from "@angular/router";
+import {EventDriverService} from "../../services/event-driver.service";
 
 @Component({
   selector: 'app-products',
@@ -18,10 +19,16 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _productService: ProductService,
+    private _eventDriverService: EventDriverService,
     private _router: Router) {
   }
 
   ngOnInit(): void {
+    this._eventDriverService.sourceEventSubjectObservable.subscribe(
+      (response) => {
+        this.onActionEvent(response);
+      }
+    )
   }
 
   onGetProducts() {
@@ -35,7 +42,7 @@ export class ProductsComponent implements OnInit {
   onGetSelectedProducts() {
     this.products$ = this._productService.getSelectedProducts().pipe(
       map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
-      startWith({dataState: DataStateEnum.LOADED}),
+      startWith({dataState: DataStateEnum.LOADING}),
       catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
     );
   }
@@ -43,7 +50,7 @@ export class ProductsComponent implements OnInit {
   onGetAvailableProducts() {
     this.products$ = this._productService.getAvailableProducts().pipe(
       map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
-      startWith({dataState: DataStateEnum.LOADED}),
+      startWith({dataState: DataStateEnum.LOADING}),
       catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
     );
   }
@@ -52,7 +59,7 @@ export class ProductsComponent implements OnInit {
     console.log(formData)
     this.products$ = this._productService.searchProducts(formData.keyword).pipe(
       map((response) => ({dataState: DataStateEnum.LOADED, data: response})),
-      startWith({dataState: DataStateEnum.LOADED}),
+      startWith({dataState: DataStateEnum.LOADING}),
       catchError((error) => of({dataState: DataStateEnum.LOADED, errorMessage: error.message}))
     );
   }

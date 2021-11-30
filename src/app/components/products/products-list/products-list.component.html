@@ -1,6 +1,8 @@
 <div class="container">
   <ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
-    <ng-container *ngSwitchCase="DataStateEnum.LOADING">Loading ...</ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+      <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </ng-container>
     <ng-container *ngSwitchCase="DataStateEnum.ERROR">
       <p class="alert alert-danger text-center mt-2">
         {{result.errorMessage}}
@@ -23,7 +25,6 @@
           <tbody>
           <app-product-item *ngFor="let product of result.data"
                             [product]="product"
-                            (eventEmitter)="onActionEvent($event)"
                             style="display: contents"
           ></app-product-item>
           </tbody>
