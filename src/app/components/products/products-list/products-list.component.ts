@@ -15,6 +15,14 @@ export class ProductsListComponent implements OnInit {
   @Input()
   public DataStateEnum = DataStateEnum;
 
+  @Input()
+  page :number=0;
+  @Input()
+  count :number=0;
+  @Input()
+  pageSize :number=0;
+  @Input()
+  pageSizes :number[]= [];
   // @Output()
   // public productsEventEmitter: EventEmitter<ActionEvent> = new EventEmitter<any>();
 

@@ -16,6 +16,10 @@ export class ProductsComponent implements OnInit {
   // public products: Product[] | null = null;
   public products$: Observable<AppDataState<Product[]>> | null = null;
   readonly DataStateEnum = DataStateEnum;
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9];
 
   constructor(
     private _productService: ProductService,
@@ -32,8 +36,10 @@ export class ProductsComponent implements OnInit {
   }
 
   onGetProducts() {
-    this.products$ = this._productService.getAllProducts().pipe(
-      map(response => ({dataState: DataStateEnum.LOADED, data: response})),
+    this.products$ = this._productService.getAllProductsPagination(1,15).pipe(
+      map(response => (
+        {dataState: DataStateEnum.LOADED, data: response}
+      )),
       startWith({dataState: DataStateEnum.LOADING}),
       catchError(error => of({dataState: DataStateEnum.ERROR, errorMessage: error.message}))
     );
@@ -80,19 +86,6 @@ export class ProductsComponent implements OnInit {
       }
     )
   }
-
-  //region Methode one
-  // onGetProducts() {
-  //   this._productService.getAllProducts().subscribe(
-  //     (response) => {
-  //       this.products = response;
-  //     },
-  //     (error)=>{
-  //       console.log("Something went wrong: ", error);
-  //     }
-  //   )
-  // }
-  //endregion
 
   onProductAdd() {
     this._router.navigateByUrl('/product-add')
@@ -143,4 +136,17 @@ export class ProductsComponent implements OnInit {
 
     }
   }
+
+  //region Methode one
+  // onGetProducts() {
+  //   this._productService.getAllProducts().subscribe(
+  //     (response) => {
+  //       this.products = response;
+  //     },
+  //     (error)=>{
+  //       console.log("Something went wrong: ", error);
+  //     }
+  //   )
+  // }
+  //endregion
 }

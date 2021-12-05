@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Product} from "../../models/product.model";
 import {ProductService} from "../../services/product.service";
 import {Location} from '@angular/common'
+import {EventDriverService} from "../../services/event-driver.service";
+import {ProductActionsTypes} from "../../states/product.state";
 
 @Component({
   selector: 'app-product-add',
@@ -24,6 +26,7 @@ export class ProductAddComponent implements OnInit {
   // });
 
   constructor(
+    private _eventDriverService: EventDriverService,
     private _productService: ProductService,
     private _formBuilder: FormBuilder,
     private _router: Router,
@@ -68,7 +71,7 @@ export class ProductAddComponent implements OnInit {
   saveProduct() {
     this._productService.saveProduct(this.product).subscribe(
       (response) => {
-        console.log(response);
+        this._eventDriverService.publishEvent({type: ProductActionsTypes.PRODUCT_ADDED});
         this.isLoading = false;
         this.isSubmitted = false;
       }

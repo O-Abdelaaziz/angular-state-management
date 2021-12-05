@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../services/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common'
+import {EventDriverService} from "../../services/event-driver.service";
+import {ProductActionsTypes} from "../../states/product.state";
 
 @Component({
   selector: 'app-product-update',
@@ -18,6 +20,7 @@ export class ProductUpdateComponent implements OnInit {
   productFormGroup?: FormGroup;
 
   constructor(
+    private _eventDriverService: EventDriverService,
     private _productService: ProductService,
     private _formBuilder: FormBuilder,
     private _router: Router,
@@ -75,7 +78,7 @@ export class ProductUpdateComponent implements OnInit {
   updateProduct() {
     this._productService.updateProduct(this.product).subscribe(
       (response) => {
-        console.log(response);
+        this._eventDriverService.publishEvent({type: ProductActionsTypes.PRODUCT_UPDATED});
         this.isLoading = false;
         this.isSubmitted = false;
       }

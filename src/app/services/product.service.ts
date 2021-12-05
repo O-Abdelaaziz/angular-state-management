@@ -13,6 +13,10 @@ export class ProductService {
   constructor(private _httpClient: HttpClient) {
   }
 
+  getAllProductsPagination(page: number, size: number): Observable<Product[]> {
+    return this._httpClient.get<Product[]>(`${this.host}/products?_page=${page}&_limit=${size}`);
+  }
+
   getAllProducts(): Observable<Product[]> {
     return this._httpClient.get<Product[]>(`${this.host}/products`)
   }

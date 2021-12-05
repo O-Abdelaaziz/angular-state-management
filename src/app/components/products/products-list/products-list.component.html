@@ -23,8 +23,9 @@
           </tr>
           </thead>
           <tbody>
-          <app-product-item *ngFor="let product of result.data"
-                            [product]="product"
+          <app-product-item [product]="product" *ngFor="let product of result.data"
+
+
                             style="display: contents"
           ></app-product-item>
           </tbody>

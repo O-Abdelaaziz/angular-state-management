@@ -1,11 +1,10 @@
-
 <tr *ngIf="product">
   <td>{{product.id}}</td>
   <td>{{product.name}}</td>
   <td>{{product.price}}</td>
   <td>{{product.quantity}}</td>
-  <td>{{product.selected}}</td>
-  <td>{{product.available}}</td>
+  <td><span [ngClass]="product.selected ?'fa fa-check-circle text-success':'fa fa-times-circle text-danger'"></span></td>
+  <td><span [ngClass]="product.available ?'fa fa-check-square text-success':'fa fa-window-close text-danger'"></span></td>
   <td>
     <button (click)="onSelect(product)" [ngClass]="product.selected? 'btn-danger':'btn-success'"
             class="btn btn-sm">
